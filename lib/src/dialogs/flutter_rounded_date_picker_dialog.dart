@@ -9,32 +9,34 @@ import 'package:flutter_rounded_date_picker/src/widgets/flutter_rounded_month_pi
 import 'package:flutter_rounded_date_picker/src/widgets/flutter_rounded_year_picker.dart';
 
 class FlutterRoundedDatePickerDialog extends StatefulWidget {
-  const FlutterRoundedDatePickerDialog(
-      {Key? key,
-      this.height,
-      required this.initialDate,
-      required this.firstDate,
-      required this.lastDate,
-      this.selectableDayPredicate,
-      required this.initialDatePickerMode,
-      required this.era,
-      this.locale,
-      required this.borderRadius,
-      this.imageHeader,
-      this.description = "",
-      this.fontFamily,
-      this.textNegativeButton,
-      this.textPositiveButton,
-      this.textActionButton,
-      this.onTapActionButton,
-      this.styleDatePicker,
-      this.styleYearPicker,
-      this.customWeekDays,
-      this.builderDay,
-      this.listDateDisabled,
-      this.onTapDay,
-      this.onMonthChange})
-      : super(key: key);
+  const FlutterRoundedDatePickerDialog({
+    Key? key,
+    this.height,
+    required this.initialDate,
+    required this.firstDate,
+    required this.lastDate,
+    this.selectableDayPredicate,
+    required this.initialDatePickerMode,
+    required this.era,
+    this.locale,
+    required this.borderRadius,
+    this.imageHeader,
+    this.description = "",
+    this.fontFamily,
+    this.textNegativeButton,
+    this.textPositiveButton,
+    this.textActionButton,
+    this.onTapActionButton,
+    this.onTapButtonNegative,
+    this.onTapButtonPositive,
+    this.styleDatePicker,
+    this.styleYearPicker,
+    this.customWeekDays,
+    this.builderDay,
+    this.listDateDisabled,
+    this.onTapDay,
+    this.onMonthChange,
+  }) : super(key: key);
 
   final DateTime initialDate;
   final DateTime firstDate;
@@ -65,6 +67,8 @@ class FlutterRoundedDatePickerDialog extends StatefulWidget {
   final String? textActionButton;
 
   final VoidCallback? onTapActionButton;
+  final VoidCallback? onTapButtonNegative;
+  final VoidCallback? onTapButtonPositive;
 
   /// Style
   final MaterialRoundedDatePickerStyle? styleDatePicker;
@@ -81,12 +85,10 @@ class FlutterRoundedDatePickerDialog extends StatefulWidget {
   final Function? onMonthChange;
 
   @override
-  _FlutterRoundedDatePickerDialogState createState() =>
-      _FlutterRoundedDatePickerDialogState();
+  _FlutterRoundedDatePickerDialogState createState() => _FlutterRoundedDatePickerDialogState();
 }
 
-class _FlutterRoundedDatePickerDialogState
-    extends State<FlutterRoundedDatePickerDialog> {
+class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePickerDialog> {
   @override
   void initState() {
     super.initState();
@@ -222,8 +224,8 @@ class _FlutterRoundedDatePickerDialogState
     final Widget actions = FlutterRoundedButtonAction(
       textButtonNegative: widget.textNegativeButton,
       textButtonPositive: widget.textPositiveButton,
-      onTapButtonNegative: _handleCancel,
-      onTapButtonPositive: _handleOk,
+      onTapButtonNegative: widget.onTapButtonNegative, //?? _handleCancel,
+      onTapButtonPositive: widget.onTapButtonPositive, //?? _handleOk,
       textActionButton: widget.textActionButton,
       onTapButtonAction: widget.onTapActionButton,
       localizations: localizations,
@@ -237,16 +239,13 @@ class _FlutterRoundedDatePickerDialogState
 
     Color backgroundPicker = theme.dialogBackgroundColor;
     if (_mode == DatePickerMode.day) {
-      backgroundPicker = widget.styleDatePicker?.backgroundPicker ??
-          theme.dialogBackgroundColor;
+      backgroundPicker = widget.styleDatePicker?.backgroundPicker ?? theme.dialogBackgroundColor;
     } else {
-      backgroundPicker = widget.styleYearPicker?.backgroundPicker ??
-          theme.dialogBackgroundColor;
+      backgroundPicker = widget.styleYearPicker?.backgroundPicker ?? theme.dialogBackgroundColor;
     }
 
     final Dialog dialog = Dialog(
-      child: OrientationBuilder(
-          builder: (BuildContext context, Orientation orientation) {
+      child: OrientationBuilder(builder: (BuildContext context, Orientation orientation) {
         final Widget header = FlutterRoundedDatePickerHeader(
             selectedDate: _selectedDate,
             mode: _mode,

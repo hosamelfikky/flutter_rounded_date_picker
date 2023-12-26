@@ -14,7 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,7 +27,7 @@ class _MyAppState extends State<MyApp> {
       locale: Locale('en', 'US'),
       supportedLocales: [
         const Locale('en', 'US'), // English
-        const Locale('th', 'TH'), // Thai
+        const Locale('ar', 'EG'), // Thai
       ],
       home: Home(),
     );

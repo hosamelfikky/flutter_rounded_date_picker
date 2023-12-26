@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
-import 'package:flutter_rounded_date_picker/src/material_rounded_date_picker_style.dart';
-import 'package:flutter_rounded_date_picker/src/material_rounded_year_picker_style.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -93,6 +91,13 @@ class _HomeState extends State<Home> {
                       firstDate: DateTime(DateTime.now().year - 1),
                       lastDate: DateTime(DateTime.now().year + 1),
                       borderRadius: 16,
+                      textNegativeButton: '',
+                      textPositiveButton: '',
+                      onTapNegativeButton: null,
+                      onTapPositiveButton: null,
+                      onTapDay: (day, value) {
+                        return true;
+                      },
                     );
                     if (newDateTime != null) {
                       setState(() => dateTime = newDateTime);
@@ -110,8 +115,7 @@ class _HomeState extends State<Home> {
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now().subtract(Duration(days: 3)),
                         lastDate: DateTime.now().add(Duration(days: 3)),
-                        styleDatePicker: MaterialRoundedDatePickerStyle(
-                            paddingMonthHeader: EdgeInsets.all(8)));
+                        styleDatePicker: MaterialRoundedDatePickerStyle(paddingMonthHeader: EdgeInsets.all(8)));
                     if (newDateTime != null) {
                       setState(() => dateTime = newDateTime);
                     }
@@ -141,8 +145,7 @@ class _HomeState extends State<Home> {
                       // theme: ThemeData(primarySwatch: Colors.deepPurple),
                       era: EraMode.BUDDHIST_YEAR,
                       styleDatePicker: MaterialRoundedDatePickerStyle(
-                        textStyleDayButton:
-                            TextStyle(fontSize: 36, color: Colors.white),
+                        textStyleDayButton: TextStyle(fontSize: 36, color: Colors.white),
                         textStyleYearButton: TextStyle(
                           fontSize: 52,
                           color: Colors.white,
@@ -151,22 +154,11 @@ class _HomeState extends State<Home> {
                           fontSize: 24,
                           color: Colors.white,
                         ),
-                        textStyleCurrentDayOnCalendar: TextStyle(
-                            fontSize: 32,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                        textStyleDayOnCalendar:
-                            TextStyle(fontSize: 28, color: Colors.white),
-                        textStyleDayOnCalendarSelected: TextStyle(
-                            fontSize: 32,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                        textStyleDayOnCalendarDisabled: TextStyle(
-                            fontSize: 28, color: Colors.white.withOpacity(0.1)),
-                        textStyleMonthYearHeader: TextStyle(
-                            fontSize: 32,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                        textStyleCurrentDayOnCalendar: TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
+                        textStyleDayOnCalendar: TextStyle(fontSize: 28, color: Colors.white),
+                        textStyleDayOnCalendarSelected: TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
+                        textStyleDayOnCalendarDisabled: TextStyle(fontSize: 28, color: Colors.white.withOpacity(0.1)),
+                        textStyleMonthYearHeader: TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
                         paddingDatePicker: EdgeInsets.all(0),
                         paddingMonthHeader: EdgeInsets.all(32),
                         paddingActionBar: EdgeInsets.all(16),
@@ -178,28 +170,18 @@ class _HomeState extends State<Home> {
                         marginTopArrowPrevious: 16,
                         marginTopArrowNext: 16,
                         marginRightArrowNext: 32,
-                        textStyleButtonAction:
-                            TextStyle(fontSize: 28, color: Colors.white),
-                        textStyleButtonPositive: TextStyle(
-                            fontSize: 28,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                        textStyleButtonNegative: TextStyle(
-                            fontSize: 28, color: Colors.white.withOpacity(0.5)),
-                        decorationDateSelected: BoxDecoration(
-                            color: Colors.orange[600], shape: BoxShape.circle),
+                        textStyleButtonAction: TextStyle(fontSize: 28, color: Colors.white),
+                        textStyleButtonPositive: TextStyle(fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold),
+                        textStyleButtonNegative: TextStyle(fontSize: 28, color: Colors.white.withOpacity(0.5)),
+                        decorationDateSelected: BoxDecoration(color: Colors.orange[600], shape: BoxShape.circle),
                         backgroundPicker: Colors.deepPurple[400],
                         backgroundActionBar: Colors.deepPurple[300],
                         backgroundHeaderMonth: Colors.deepPurple[300],
                         backgroundHeader: Colors.deepPurple[400],
                       ),
                       styleYearPicker: MaterialRoundedYearPickerStyle(
-                        textStyleYear:
-                            TextStyle(fontSize: 40, color: Colors.white),
-                        textStyleYearSelected: TextStyle(
-                            fontSize: 56,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                        textStyleYear: TextStyle(fontSize: 40, color: Colors.white),
+                        textStyleYearSelected: TextStyle(fontSize: 56, color: Colors.white, fontWeight: FontWeight.bold),
                         heightYearRow: 100,
                         backgroundPicker: Colors.deepPurple[400],
                       ),
@@ -209,15 +191,7 @@ class _HomeState extends State<Home> {
                       },
                       textPositiveButton: "OK",
                       textNegativeButton: "CANCEL",
-                      customWeekDays: [
-                        "SUN",
-                        "MON",
-                        "TUE",
-                        "WED",
-                        "THU",
-                        "FRI",
-                        "SAT"
-                      ],
+                      customWeekDays: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
                       listDateDisabled: [
                         DateTime.now().subtract(Duration(days: 2)),
                         DateTime.now().subtract(Duration(days: 4)),
@@ -235,8 +209,7 @@ class _HomeState extends State<Home> {
                           showDialog(
                               context: context,
                               builder: (c) => CupertinoAlertDialog(
-                                    title:
-                                        Text("This date cannot be selected."),
+                                    title: Text("This date cannot be selected."),
                                     actions: <Widget>[
                                       CupertinoDialogAction(
                                         child: Text("OK"),
@@ -302,8 +275,7 @@ class _HomeState extends State<Home> {
                       setState(() => dateTime = newDateTime);
                     }
                   },
-                  label: Text(
-                      "Rounded Calendar with Custom style\n(Example on Pixel C)"),
+                  label: Text("Rounded Calendar with Custom style\n(Example on Pixel C)"),
                 ),
                 const SizedBox(height: 12),
                 FloatingActionButton.extended(
@@ -336,8 +308,7 @@ class _HomeState extends State<Home> {
                     DateTime? newDateTime = await showRoundedDatePicker(
                         context: context,
                         theme: ThemeData(primarySwatch: Colors.pink),
-                        styleDatePicker: MaterialRoundedDatePickerStyle(
-                            textStyleDayButton: TextStyle(color: Colors.white)));
+                        styleDatePicker: MaterialRoundedDatePickerStyle(textStyleDayButton: TextStyle(color: Colors.white)));
                     if (newDateTime != null) {
                       setState(() => dateTime = newDateTime);
                     }
@@ -351,8 +322,7 @@ class _HomeState extends State<Home> {
                       context: context,
                       theme: ThemeData(
                         primaryColor: Colors.red[400],
-                        colorScheme:
-                            ColorScheme.fromSwatch(primarySwatch: Colors.green),
+                        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green),
                         dialogBackgroundColor: Colors.purple[50],
                         textTheme: TextTheme(
                           bodyMedium: TextStyle(color: Colors.red),
@@ -497,8 +467,7 @@ class _HomeState extends State<Home> {
                 const SizedBox(height: 12),
                 FloatingActionButton.extended(
                   onPressed: () async {
-                    await CupertinoRoundedDatePicker.show(context,
-                        fontFamily: "Mali", onDateTimeChanged: (dt) {
+                    await CupertinoRoundedDatePicker.show(context, fontFamily: "Mali", onDateTimeChanged: (dt) {
                       setState(() {
                         dateTime = dt;
                       });
