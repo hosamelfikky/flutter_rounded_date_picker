@@ -64,9 +64,10 @@ class _HomeState extends State<Home> {
                     DateTime? newDateTime = await showRoundedDatePicker(
                       context: context,
                       initialDate: DateTime.now(),
+                      showHeader: false,
                       firstDate: DateTime(DateTime.now().year - 1),
                       lastDate: DateTime(DateTime.now().year + 1),
-                      borderRadius: 2,
+                      borderRadius: 30,
                     );
                     print(newDateTime);
                     if (newDateTime != null) {
@@ -323,12 +324,11 @@ class _HomeState extends State<Home> {
                       theme: ThemeData(
                         primaryColor: Colors.red[400],
                         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green),
-                        dialogBackgroundColor: Colors.purple[50],
                         textTheme: TextTheme(
                           bodyMedium: TextStyle(color: Colors.red),
                           bodySmall: TextStyle(color: Colors.blue),
                         ),
-                        disabledColor: Colors.orange,
+                        disabledColor: Colors.orange, dialogTheme: DialogThemeData(backgroundColor: Colors.purple[50]),
                         // textTheme: TextTheme(
                         //   bodyLarge: TextStyle(color: Colors.green[200]),
                         // ),
