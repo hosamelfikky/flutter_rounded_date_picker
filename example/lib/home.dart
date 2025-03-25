@@ -65,9 +65,13 @@ class _HomeState extends State<Home> {
                       context: context,
                       initialDate: DateTime.now(),
                       showHeader: false,
+                      showActions: false,
                       firstDate: DateTime(DateTime.now().year - 1),
                       lastDate: DateTime(DateTime.now().year + 1),
                       borderRadius: 30,
+                      styleDatePicker: MaterialRoundedDatePickerStyle(
+                        paddingMonthHeader: EdgeInsets.only(top: 20),
+                      ),
                     );
                     print(newDateTime);
                     if (newDateTime != null) {
