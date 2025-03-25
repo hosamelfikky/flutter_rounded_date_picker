@@ -207,6 +207,7 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
             firstDate: widget.firstDate,
             lastDate: widget.lastDate,
             era: widget.era,
+            showActions: widget.showActions,
             locale: widget.locale,
             selectableDayPredicate: widget.selectableDayPredicate,
             fontFamily: widget.fontFamily,
@@ -280,7 +281,7 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Flexible(child: picker),
-                        actions,
+                        if(widget.showActions) actions,
                       ],
                     ),
                   ),

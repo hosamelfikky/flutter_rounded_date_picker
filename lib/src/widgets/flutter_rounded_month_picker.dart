@@ -43,6 +43,7 @@ class FlutterRoundedMonthPicker extends StatefulWidget {
       this.fontFamily,
       this.style,
       this.borderRadius = 0,
+      this.showActions,
       this.customWeekDays,
       this.builderDay,
       this.listDateDisabled,
@@ -83,6 +84,7 @@ class FlutterRoundedMonthPicker extends StatefulWidget {
   final MaterialRoundedDatePickerStyle? style;
 
   final double borderRadius;
+  final bool showActions;
 
   /// Custom Weekday.
   final List<String>? customWeekDays;
@@ -279,7 +281,7 @@ class _FlutterRoundedMonthPickerState extends State<FlutterRoundedMonthPicker>
           borderRadius: orientation == Orientation.landscape
               ? BorderRadius.only(
                   topRight: Radius.circular(widget.borderRadius))
-              : null),
+              : widget.showActions ? null : BorderRadius.vertical(bottom: Radius.circular(widget.borderRadius))),
       // The month picker just adds month navigation to the day picker, so make
       // it the same height as the DayPicker
 //      height: _kMaxDayPickerHeight,
