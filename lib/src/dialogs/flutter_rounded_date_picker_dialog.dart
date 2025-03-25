@@ -20,6 +20,7 @@ class FlutterRoundedDatePickerDialog extends StatefulWidget {
     required this.era,
     this.locale,
     required this.borderRadius,
+    this.showActions = true,
     this.imageHeader,
     this.description = "",
     this.fontFamily,
@@ -46,6 +47,9 @@ class FlutterRoundedDatePickerDialog extends StatefulWidget {
 
   /// double height.
   final double? height;
+
+  /// Show Actions Or not
+  final bool showActions;
 
   /// Custom era year.
   final EraMode era;
@@ -302,7 +306,7 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
                       height: widget.height,
                       child: picker,
                     ),
-                  actions,
+                 if(widget.showActions) actions,
                 ],
               ),
             );
