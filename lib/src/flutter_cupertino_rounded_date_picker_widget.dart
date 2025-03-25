@@ -674,10 +674,13 @@ class _CupertinoDatePickerDateTimeState extends State<FlutterRoundedCupertinoDat
     }
 
     return Container(
+      width: widget.size?.width ?? _kPickerWidth,
+      height: widget.size?.height,
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
-          color: widget.background,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(widget.borderRadius), topRight: Radius.circular(widget.borderRadius))),
+        color: widget.background,
+        borderRadius: BorderRadius.circular(widget.borderRadius),
+      ),
       child: MediaQuery(
         data: const MediaQueryData(textScaler: TextScaler.linear(1.0)),
         child: DefaultTextStyle.merge(
@@ -923,8 +926,6 @@ class _CupertinoDatePickerDateState extends State<FlutterRoundedCupertinoDatePic
     }
 
     return Container(
-      width: widget.size?.width,
-      height: widget.size?.height,
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.borderRadius),
