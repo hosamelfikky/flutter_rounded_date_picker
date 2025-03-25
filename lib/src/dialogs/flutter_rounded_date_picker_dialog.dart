@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +23,7 @@ class FlutterRoundedDatePickerDialog extends StatefulWidget {
     this.locale,
     required this.borderRadius,
     this.showActions = true,
+    this.showHeader = true,
     this.imageHeader,
     this.description = "",
     this.fontFamily,
@@ -50,6 +53,9 @@ class FlutterRoundedDatePickerDialog extends StatefulWidget {
 
   /// Show Actions Or not
   final bool showActions;
+
+  /// Show Header Or not
+  final bool showHeader;
 
   /// Custom era year.
   final EraMode era;
@@ -229,8 +235,8 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
     final Widget actions = FlutterRoundedButtonAction(
       textButtonNegative: widget.textNegativeButton,
       textButtonPositive: widget.textPositiveButton,
-      onTapButtonNegative: widget.onTapButtonNegative, //?? _handleCancel,
-      onTapButtonPositive: widget.onTapButtonPositive, //?? _handleOk,
+      onTapButtonNegative: widget.onTapButtonNegative ?? _handleCancel,
+      onTapButtonPositive: widget.onTapButtonPositive ?? _handleOk,
       textActionButton: widget.textActionButton,
       onTapButtonAction: widget.onTapActionButton,
       localizations: localizations,
@@ -273,7 +279,7 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Flexible(flex: 1, child: header),
+                  if (widget.showHeader) Flexible(flex: 1, child: header),
                   Flexible(
                     flex: 2, // have the picker take up 2/3 of the dialog width
                     child: Column(
@@ -281,7 +287,7 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Flexible(child: picker),
-                        if(widget.showActions) actions,
+                        if (widget.showActions) actions,
                       ],
                     ),
                   ),
@@ -299,7 +305,7 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  header,
+                  if (widget.showHeader) header,
                   if (widget.height == null)
                     Flexible(child: picker)
                   else
@@ -307,7 +313,7 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
                       height: widget.height,
                       child: picker,
                     ),
-                 if(widget.showActions) actions,
+                  if (widget.showActions) actions,
                 ],
               ),
             );
@@ -316,7 +322,7 @@ class _FlutterRoundedDatePickerDialogState extends State<FlutterRoundedDatePicke
     );
 
     return Theme(
-      data: theme.copyWith(dialogBackgroundColor: Colors.transparent),
+      data: theme.copyWith(dialogTheme: DialogThemeData(backgroundColor: Colors.transparent)),
       child: dialog,
     );
   }
