@@ -673,10 +673,18 @@ class _CupertinoDatePickerDateTimeState extends State<FlutterRoundedCupertinoDat
       ));
     }
 
+    final margin = widget.size != null
+        ? EdgeInsets.symmetric(
+            horizontal: (MediaQuery.sizeOf(context).width - widget.size!.width) / 2,
+            vertical: (MediaQuery.sizeOf(context).height - widget.size!.height) / 2,
+          )
+        : null;
+
     return Container(
       width: widget.size?.width ?? _kPickerWidth,
       height: widget.size?.height,
       padding: EdgeInsets.all(8),
+      margin: margin,
       decoration: BoxDecoration(
         color: widget.background,
         borderRadius: BorderRadius.circular(widget.borderRadius),
