@@ -66,6 +66,7 @@ class FlutterRoundedDayPicker extends StatelessWidget {
       required this.firstDate,
       required this.lastDate,
       required this.displayedMonth,
+      this.showHeader = true,
       this.selectableDayPredicate,
       this.dragStartBehavior = DragStartBehavior.start,
       required this.era,
@@ -115,6 +116,7 @@ class FlutterRoundedDayPicker extends StatelessWidget {
   final BuilderDayOfDatePicker? builderDay;
   final List<DateTime>? listDateDisabled;
   final OnTapDay? onTapDay;
+  final bool showHeader;
 
   /// Determines the way that drag start behavior is handled.
   ///
@@ -405,8 +407,13 @@ class FlutterRoundedDayPicker extends StatelessWidget {
           Container(
             height: 45,
             decoration: BoxDecoration(
-                color: style?.backgroundHeaderMonth,
-                borderRadius: orientation == Orientation.landscape ? BorderRadius.only(topRight: Radius.circular(borderRadius)) : null),
+              color: style?.backgroundHeaderMonth,
+              borderRadius: orientation == Orientation.landscape
+                  ? BorderRadius.only(topRight: Radius.circular(borderRadius))
+                  : !showHeader
+                      ? BorderRadius.circular(borderRadius)
+                      : null,
+            ),
             padding: style?.paddingMonthHeader,
 //            height: _kDayPickerRowHeight,
             child: Center(
