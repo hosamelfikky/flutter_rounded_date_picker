@@ -272,12 +272,15 @@ class _FlutterRoundedMonthPickerState extends State<FlutterRoundedMonthPicker> w
     Orientation orientation = MediaQuery.of(context).orientation;
     return Container(
       decoration: BoxDecoration(
-          color: widget.style?.backgroundPicker,
-          borderRadius: orientation == Orientation.landscape
-              ? BorderRadius.only(topRight: Radius.circular(widget.borderRadius))
-              : widget.showActions
-                  ? null
-                  : BorderRadius.vertical(bottom: Radius.circular(widget.borderRadius))),
+        color: widget.style?.backgroundPicker,
+        borderRadius: orientation == Orientation.landscape
+            ? BorderRadius.only(topRight: Radius.circular(widget.borderRadius))
+            : widget.showActions
+                ? null
+                : widget.showHeader
+                    ? BorderRadius.vertical(bottom: Radius.circular(widget.borderRadius))
+                    : BorderRadius.circular(widget.borderRadius),
+      ),
       // The month picker just adds month navigation to the day picker, so make
       // it the same height as the DayPicker
 //      height: _kMaxDayPickerHeight,
